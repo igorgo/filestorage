@@ -41,7 +41,9 @@ fsTest.test('Write string to file', (test, { storage }) => {
   const dh = '4285d10832a8edf4cc7979e9a257e145dc5c934549f62e0bf1dc6070e67cc4ab';
   const dataSize = 5;
 
-  storage.write(new common.Uint64(0), data,
+  storage.write(
+    new common.Uint64(0),
+    data,
     { checksum: 'CRC32', dedupHash: 'SHA256' },
     (err, { checksum, dedupHash, size }) => {
       test.error(err);
@@ -54,7 +56,8 @@ fsTest.test('Write string to file', (test, { storage }) => {
         test.strictSame(d.toString(), data);
         test.end();
       });
-    });
+    }
+  );
 });
 
 fsTest.test('Write Buffer to file', (test, { storage }) => {
@@ -63,7 +66,9 @@ fsTest.test('Write Buffer to file', (test, { storage }) => {
   const dh = '5b41362bc82b7f3d56edc5a306db22105707d01ff4819e26faef9724a2d406c9';
   const dataSize = 5;
 
-  storage.write(new common.Uint64(1), Buffer.from(data),
+  storage.write(
+    new common.Uint64(1),
+    Buffer.from(data),
     { checksum: 'CRC32', dedupHash: 'SHA256' },
     (err, { checksum, dedupHash, size }) => {
       test.error(err);
@@ -76,7 +81,8 @@ fsTest.test('Write Buffer to file', (test, { storage }) => {
         test.strictSame(d.toString(), data);
         test.end();
       });
-    });
+    }
+  );
 });
 
 fsTest.test('Read file', (test, { storage }) => {
@@ -221,7 +227,10 @@ fsTest.test('Write and read small file', (test, { storage }) => {
   const dh = 'b5cc74ab5bb5a5f1acc7407be3e4cbce8611c5ed07354ab9e510b74ee0b273cb';
   const dataSize = 5;
 
-  storage.write(id, data, { checksum: 'CRC32', dedupHash: 'SHA256' },
+  storage.write(
+    id,
+    data,
+    { checksum: 'CRC32', dedupHash: 'SHA256' },
     (err, { checksum, dedupHash, size }) => {
       test.error(err);
       test.strictSame(checksum, cs);
@@ -233,7 +242,8 @@ fsTest.test('Write and read small file', (test, { storage }) => {
         test.strictSame(d, data);
         test.end();
       });
-    });
+    }
+  );
 });
 
 fsTest.test('Write, compress and read small file', (test, { storage }) => {
@@ -243,7 +253,10 @@ fsTest.test('Write, compress and read small file', (test, { storage }) => {
   const dh = 'bbe0aa41024faeac81813a0194a95637d54cc65c025e0efd857ce0afcd51573f';
   const dataSize = 5;
 
-  storage.write(id, data, { checksum: 'CRC32', dedupHash: 'SHA256' },
+  storage.write(
+    id,
+    data,
+    { checksum: 'CRC32', dedupHash: 'SHA256' },
     (err, { checksum, dedupHash, size }) => {
       test.error(err);
       test.strictSame(checksum, cs);
@@ -260,7 +273,8 @@ fsTest.test('Write, compress and read small file', (test, { storage }) => {
           test.end();
         });
       });
-    });
+    }
+  );
 });
 
 fsTest.test('Write and read big file', (test, { storage }) => {
@@ -270,7 +284,10 @@ fsTest.test('Write and read big file', (test, { storage }) => {
   const dh = '7a8553c5934fd3b4a068a3d4c5bafc189e1fe8e0f7f46cbcc0fc1199249a39a2';
   const dataSize = 6000;
 
-  storage.write(id, data, { checksum: 'CRC32', dedupHash: 'SHA256' },
+  storage.write(
+    id,
+    data,
+    { checksum: 'CRC32', dedupHash: 'SHA256' },
     (err, { checksum, dedupHash, size }) => {
       test.error(err);
       test.strictSame(checksum, cs);
@@ -282,7 +299,8 @@ fsTest.test('Write and read big file', (test, { storage }) => {
         test.strictSame(d, data);
         test.end();
       });
-    });
+    }
+  );
 });
 
 fsTest.test('Write, compress and read big file', (test, { storage }) => {
@@ -292,7 +310,10 @@ fsTest.test('Write, compress and read big file', (test, { storage }) => {
   const dh = 'f1cf91dea01f77fd860645de51462794cfbbae0a14d81350b21934e58a69941d';
   const dataSize = 6000;
 
-  storage.write(id, data, { checksum: 'CRC32', dedupHash: 'SHA256' },
+  storage.write(
+    id,
+    data,
+    { checksum: 'CRC32', dedupHash: 'SHA256' },
     (err, { checksum, dedupHash, size }) => {
       test.error(err);
       test.strictSame(checksum, cs);
@@ -309,7 +330,8 @@ fsTest.test('Write, compress and read big file', (test, { storage }) => {
           test.end();
         });
       });
-    });
+    }
+  );
 });
 
 fsTest.test('Write and read small file', (test, { storage }) => {
@@ -319,7 +341,10 @@ fsTest.test('Write and read small file', (test, { storage }) => {
   const dh = 'fab270bfcdc81e464611cd112e95c6b9590ba55483fbfe2dda98d67ddc741ab3';
   const dataSize = 60;
 
-  storage.write(id, data, { checksum: 'CRC32', dedupHash: 'SHA256' },
+  storage.write(
+    id,
+    data,
+    { checksum: 'CRC32', dedupHash: 'SHA256' },
     (err, { checksum, dedupHash, size }) => {
       test.error(err);
       test.strictSame(checksum, cs);
@@ -331,7 +356,8 @@ fsTest.test('Write and read small file', (test, { storage }) => {
         test.strictSame(d, data);
         test.end();
       });
-    });
+    }
+  );
 });
 
 fsTest.test('Get file stats', (test, { storage }) => {
@@ -372,7 +398,9 @@ fsTest.test('Update file', (test, { storage }) => {
 
   const id = new common.Uint64(15);
 
-  storage.write(id, data1,
+  storage.write(
+    id,
+    data1,
     { checksum: 'CRC32', dedupHash: 'SHA256' },
     (err, { checksum, dedupHash, size }) => {
       test.error(err);
@@ -380,7 +408,9 @@ fsTest.test('Update file', (test, { storage }) => {
       test.strictSame(dedupHash, dh1);
       test.strictSame(size, dataSize1);
 
-      storage.update(id, data2,
+      storage.update(
+        id,
+        data2,
         { checksum: 'CRC32', dedupHash: 'SHA256' },
         (err, { checksum, dedupHash, size, originalSize }) => {
           test.error(err);
@@ -394,7 +424,8 @@ fsTest.test('Update file', (test, { storage }) => {
             test.strictSame(d.toString(), data2);
             test.end();
           });
-        });
-    });
-
+        }
+      );
+    }
+  );
 });
